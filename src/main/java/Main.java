@@ -13,10 +13,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import sun.security.mscapi.CPublicKey;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -31,6 +28,7 @@ public class Main {
         final String MY_DATABASE = "mydatabase";
         FirebaseOptions options = null;
         Scanner scanner = new Scanner(System.in);
+        InputStreamReader sr = new InputStreamReader(System.in, "utf8");
 
 
             serviceAccount = new FileInputStream("./ServiceAccountKey.json");
@@ -70,9 +68,10 @@ public class Main {
         int count = 0;
         HashMap<String, String> message = new HashMap<>();
         while (!in.equals("end")){
+
             in = scanner.nextLine();
             message.put(key + count, in);
-            count++;
+            //count++;
             ApiFuture<WriteResult> result = docRef.set(message);
             System.out.println("susesfull: " + result.get().getUpdateTime());
         }
